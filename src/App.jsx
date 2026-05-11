@@ -2,14 +2,40 @@ import { useEffect, useRef, useState } from 'react';
 import './index.css';
 import About from './components/About';
 
-const skills = [
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'React',
-  'Java',
-  'Python (Basic)',
-  'PostgreSQL'
+const skillCategories = [
+  {
+    category: 'Frontend',
+    skills: ['HTML', 'CSS', 'JavaScript', 'React']
+  },
+  {
+    category: 'Backend & DB',
+    skills: ['Java', 'Python (Basic)', 'PostgreSQL']
+  },
+  {
+    category: 'Core Concepts',
+    skills: ['DSA', 'OOPS']
+  }
+];
+
+const internships = [
+  {
+    company: 'Internpe',
+    location: 'Jaipur',
+    role: 'Web Development Intern',
+    period: '08/2025 – 09/2025',
+    icon: '🌐',
+    color: 'intern-cyan',
+    description: 'Gained practical experience in HTML, CSS, JS by doing simple projects. Developed responsive and user-friendly web pages using HTML, CSS, and JavaScript.'
+  },
+  {
+    company: 'Kaashiv Infotech',
+    location: 'Chennai',
+    role: 'Web Designing Intern',
+    period: '11/2024 – 11/2024',
+    icon: '🎨',
+    color: 'intern-purple',
+    description: 'Learnt how to build an effective web page by excelling in UI / UX designing.'
+  }
 ];
 
 const projects = [
@@ -105,6 +131,7 @@ function App() {
         <nav>
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
+          <a href="#internships">Internships</a>
           <a href="#projects">Projects</a>
           <a href="#certifications">Certifications</a>
           <a href="#contact">Contact</a>
@@ -146,10 +173,15 @@ function App() {
         className={`section ${visible.skills ? 'visible' : ''}`}
       >
         <h2 className="section-title">Technical Skills</h2>
-        <div className="cards-grid">
-          {skills.map((skill, i) => (
-            <div key={i} className="card">
-              <h3>{skill}</h3>
+        <div className="skills-categories">
+          {skillCategories.map((cat, ci) => (
+            <div key={ci} className="skill-category">
+              <h3 className="skill-category-title">{cat.category}</h3>
+              <div className="skill-tags">
+                {cat.skills.map((skill, si) => (
+                  <span key={si} className="skill-tag">{skill}</span>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -209,7 +241,33 @@ function App() {
         </div>
       </section>
 
-
+      {/* INTERNSHIPS */}
+      <section
+        id="internships"
+        ref={(el) => (sectionsRef.current.internships = el)}
+        className={`section ${visible.internships ? 'visible' : ''}`}
+      >
+        <h2 className="section-title">Internships</h2>
+        <p className="section-subtitle">Real-world experience and industry exposure</p>
+        <div className="internships-list">
+          {internships.map((intern, i) => (
+            <div key={i} className={`intern-card ${intern.color}`} style={{ animationDelay: `${i * 0.15}s` }}>
+              <div className="intern-icon">{intern.icon}</div>
+              <div className="intern-body">
+                <div className="intern-header">
+                  <div>
+                    <h3 className="intern-company">{intern.company}</h3>
+                    <span className="intern-role">{intern.role}</span>
+                    <span className="intern-location">📍 {intern.location}</span>
+                  </div>
+                  <span className="intern-period">{intern.period}</span>
+                </div>
+                <p className="intern-desc">{intern.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* CERTIFICATIONS */}
       <section
@@ -249,36 +307,45 @@ function App() {
   </p>
 
   <div className="contact-card">
-    <div className="contact-item">
-      <span className="contact-label">Email</span>
-      <a href="mailto:san9345420@gmail.com">
-        san9345420@gmail.com
-      </a>
-    </div>
+    <div className="contact-links-grid">
+      <div className="contact-item">
+        <span className="contact-label">Email</span>
+        <a href="mailto:san9345420@gmail.com">san9345420@gmail.com</a>
+      </div>
 
-    <div className="contact-item">
-      <span className="contact-label">LinkedIn</span>
-      <a
-        href="https://www.linkedin.com/in/sanjaya-m-085738349/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        linkedin.com/in/sanjaya-m
-      </a>
+      <div className="contact-item">
+        <span className="contact-label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/sanjaya-m-085738349/" target="_blank" rel="noreferrer">
+          linkedin.com/in/sanjaya-m
+        </a>
+      </div>
+
+      <div className="contact-item">
+        <span className="contact-label">GitHub</span>
+        <a href="https://github.com/Sanjaya1822" target="_blank" rel="noreferrer">
+          github.com/Sanjaya1822
+        </a>
+      </div>
+
+      <div className="contact-item">
+        <span className="contact-label">LeetCode</span>
+        <a href="https://leetcode.com/u/Sanjayam/" target="_blank" rel="noreferrer">
+          leetcode.com/u/Sanjayam
+        </a>
+      </div>
+
+      <div className="contact-item">
+        <span className="contact-label">HackerRank</span>
+        <a href="https://www.hackerrank.com/profile/san9345420" target="_blank" rel="noreferrer">
+          hackerrank.com/san9345420
+        </a>
+      </div>
     </div>
 
     <div className="contact-actions">
-      <a href="mailto:san9345420@gmail.com" className="btn primary">
-        Send Email
-      </a>
-      <a
-        href="https://www.linkedin.com/in/sanjaya-m-085738349/"
-        target="_blank"
-        rel="noreferrer"
-        className="btn"
-      >
-        LinkedIn
-      </a>
+      <a href="mailto:san9345420@gmail.com" className="btn primary">Send Email</a>
+      <a href="https://github.com/Sanjaya1822" target="_blank" rel="noreferrer" className="btn">GitHub</a>
+      <a href="https://www.linkedin.com/in/sanjaya-m-085738349/" target="_blank" rel="noreferrer" className="btn">LinkedIn</a>
     </div>
   </div>
 </section>
